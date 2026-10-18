@@ -1,24 +1,9 @@
-# Sample Query Results
+# Query Results (Based on Actual Dataset)
 
-This folder contains **sample output** of all the SQL queries in CSV format.
+These CSV files contain the **actual output** of the SQL queries run on the provided dataset.
 
-You can download any CSV file and open it in:
-- Microsoft Excel
-- Google Sheets
-- LibreOffice Calc
-- VS Code / any text editor
+> Note: 
+> - Query 4 (avg selling price > ₹15,000) returned **0 rows** because the highest average selling price in the data is ₹4,495.
+> - Query 5 (MRP difference > ₹10,000) returned **0 rows** because the maximum MRP difference across categories is ₹4,563.
 
-> **Note:** These are sample/dummy results for demonstration purposes.  
-> Actual results will depend on your database data.
-
-## Files
-
-| File | Description |
-|------|-------------|
-| `01_employee_performance.csv` | Employee orders, high-value orders & total sales |
-| `02_employee_customers_served.csv` | Employees and unique customers served |
-| `03_city_wise_sales.csv` | City-wise sales performance |
-| `04_product_analysis.csv` | High average selling price products |
-| `05_category_mrp_analysis.csv` | Categories with high MRP variation |
-| `06_payment_method_analysis.csv` | Payment method success analysis |
-| `07_top_products_by_quantity.csv` | Top 15 products by quantity sold |
+You can download any file and open it in Excel / Google Sheets.

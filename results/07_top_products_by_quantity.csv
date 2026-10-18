@@ -1,16 +1,16 @@
 ProductID,ProductName,CategoryName,total_qty_sold,total_sales
-P1023,Wireless Earbuds Pro,Electronics,245,1225000
-P1089,Smart Watch Series 7,Wearables,198,1584000
-P1011,Power Bank 20000mAh,Accessories,176,528000
-P1067,USB-C Fast Charger,Accessories,165,247500
-P1034,Bluetooth Speaker Mini,Electronics,142,426000
-P1098,Phone Case Premium,Accessories,138,138000
-P1045,MacBook Pro 16",Laptops,52,9879480
-P1092,iPhone 15 Pro Max,Smartphones,89,13341100
-P1078,Samsung Galaxy S24 Ultra,Smartphones,71,9229929
-P1056,Dell XPS 15,Laptops,48,7920000
-P1103,iPad Pro 12.9",Tablets,45,5080500
-P1120,Sony Bravia 65" OLED,Electronics,34,6119660
-P1087,Canon EOS R6 Mark II,Cameras,32,6079968
-P1115,AirPods Pro 2,Electronics,95,2375000
-P1028,Gaming Mouse RGB,Accessories,121,181500
+P028,Product 28,Furniture,43,137299
+P023,Product 23,Home,41,101721
+P025,Product 25,Beauty,34,15470
+P029,Product 29,Toys,33,125202
+P015,Product 15,Beauty,33,44649
+P005,Product 5,Beauty,33,116688
+P002,Product 2,Fashion,31,64666
+P049,Product 49,Toys,31,103881
+P043,Product 43,Home,30,125070
+P017,Product 17,Books,30,25170
+P046,Product 46,Sports,30,63000
+P044,Product 44,Kitchen,29,111302
+P013,Product 13,Home,29,40223
+P001,Product 1,Electronics,28,7952
+P039,Product 39,Toys,28,9576
