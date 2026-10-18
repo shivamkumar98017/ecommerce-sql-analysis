@@ -1,0 +1,8 @@
+ProductID,ProductName,no_of_orders,sold_qty,avg_selling_price
+P1045,MacBook Pro 16",48,52,189990.00
+P1092,iPhone 15 Pro Max,67,89,149900.00
+P1078,Samsung Galaxy S24 Ultra,55,71,129999.00
+P1120,Sony Bravia 65" OLED,31,34,179990.00
+P1056,Dell XPS 15,42,48,165000.00
+P1103,iPad Pro 12.9",38,45,112900.00
+P1087,Canon EOS R6 Mark II,29,32,189999.00
