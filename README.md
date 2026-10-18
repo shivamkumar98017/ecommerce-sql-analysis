@@ -13,85 +13,91 @@ This project contains multiple analytical queries written to answer key business
 - Subqueries
 - Filtering & Sorting
 
-## 🗂 Database Schema (Assumed)
+## 🗂 Database Schema
 
 Tables used:
-- `employees`
-- `orders`
-- `order_items`
-- `customers`
-- `products`
-- `categories`
-- `payments`
+- `employees` (10 rows)
+- `orders` (300 rows)
+- `order_items` (594 rows)
+- `customers` (100 rows)
+- `products` (50 rows)
+- `categories` (10 rows)
+- `payments` (300 rows)
+- + warehouses, suppliers, inventory, etc.
 
-> Note: Queries use BigQuery-style dataset prefix `` `e1.` ``. Adjust according to your database (MySQL / PostgreSQL / SQL Server).
+> Full dataset is available in the [`data/`](./data) folder.
 
 ## 📁 Project Structure
 
 ```
 ecommerce-sql-analysis/
 ├── README.md
-├── queries/
-│   ├── 01_employee_performance.sql
-│   ├── 02_employee_customers_served.sql
-│   ├── 03_city_wise_sales.sql
-│   ├── 04_product_analysis.sql
-│   ├── 05_category_mrp_analysis.sql
-│   ├── 06_payment_method_analysis.sql
-│   └── 07_top_products_by_quantity.sql
-└── results/
-    └── sample_outputs.md
+├── data/                  # Complete dataset (CSV)
+├── queries/               # SQL query files
+└── results/               # Actual query outputs (CSV)
 ```
 
-## 🔍 Queries + Sample Results
+## 🔍 Queries + Actual Results
 
 ---
 
 ### 1. Employee Performance Analysis
 
-**Objective:** Find employees who handled at least 5 orders, along with high-value orders and total sales.
+**Objective:** Employees who handled ≥ 5 orders, high-value orders (> ₹50,000), and total sales.
 
-**Sample Result:**
+**Actual Result:**
 
-| EmployeeID | Name           | Department   | orders_handled | HighValueOrders | total_sales   |
-|------------|----------------|--------------|----------------|-----------------|---------------|
-| 105        | Rahul Sharma   | Sales        | 28             | 9               | 18,45,670     |
-| 112        | Priya Verma    | Sales        | 22             | 7               | 15,32,450     |
-| 108        | Amit Patel     | Support      | 19             | 5               | 12,89,300     |
-| 101        | Neha Gupta     | Sales        | 17             | 6               | 11,56,800     |
-| 115        | Vikram Singh   | Sales        | 14             | 4               | 9,87,250      |
+| EmployeeID | Name  | Department | orders_handled | HighValueOrders | total_sales |
+|------------|-------|------------|----------------|-----------------|-------------|
+| E008       | Emp8  | Sales      | 41             | 0               | 3,58,565    |
+| E005       | Emp5  | Sales      | 33             | 0               | 3,33,012    |
+| E010       | Emp10 | Sales      | 33             | 0               | 3,27,072    |
+| E003       | Emp3  | Sales      | 31             | 0               | 3,02,611    |
+| E006       | Emp6  | Sales      | 37             | 0               | 2,96,637    |
+| E002       | Emp2  | Sales      | 26             | 0               | 2,72,538    |
+| E007       | Emp7  | Sales      | 25             | 0               | 2,52,544    |
+| E009       | Emp9  | Sales      | 28             | 0               | 2,26,483    |
+| E001       | Emp1  | Sales      | 26             | 0               | 2,20,040    |
+| E004       | Emp4  | Sales      | 20             | 0               | 1,33,392    |
+
+> Note: No order exceeded ₹50,000 in this dataset, so HighValueOrders = 0 for all.
 
 ---
 
 ### 2. Employees & Customers Served
 
-**Objective:** Employees who handled more than 5 orders and how many unique customers they served.
+**Objective:** Employees who handled > 5 orders and number of unique customers served.
 
-**Sample Result:**
+**Actual Result:**
 
-| EmployeeID | Name           | Department   | orders_handled | served_customers |
-|------------|----------------|--------------|----------------|------------------|
-| 105        | Rahul Sharma   | Sales        | 28             | 24               |
-| 112        | Priya Verma    | Sales        | 22             | 19               |
-| 108        | Amit Patel     | Support      | 19             | 17               |
-| 101        | Neha Gupta     | Sales        | 17             | 15               |
-| 115        | Vikram Singh   | Sales        | 14             | 13               |
+| EmployeeID | Name  | Department | orders_handled | served_customers |
+|------------|-------|------------|----------------|------------------|
+| E008       | Emp8  | Sales      | 41             | 32               |
+| E006       | Emp6  | Sales      | 37             | 34               |
+| E010       | Emp10 | Sales      | 33             | 30               |
+| E005       | Emp5  | Sales      | 33             | 30               |
+| E003       | Emp3  | Sales      | 31             | 26               |
+| E009       | Emp9  | Sales      | 28             | 26               |
+| E002       | Emp2  | Sales      | 26             | 25               |
+| E001       | Emp1  | Sales      | 26             | 25               |
+| E007       | Emp7  | Sales      | 25             | 22               |
+| E004       | Emp4  | Sales      | 20             | 18               |
 
 ---
 
 ### 3. City-wise Sales Analysis
 
-**Objective:** Cities with total sales greater than ₹3,00,000.
+**Objective:** Cities with total sales > ₹3,00,000.
 
-**Sample Result:**
+**Actual Result:**
 
-| City         | no_of_customers | no_of_orders | total_sales  | avg_item_value |
-|--------------|-----------------|--------------|--------------|----------------|
-| Mumbai       | 145             | 312          | 28,45,600    | 4,850.25       |
-| Delhi        | 132             | 278          | 24,67,300    | 4,620.80       |
-| Bangalore    | 118             | 245          | 21,89,450    | 5,120.40       |
-| Hyderabad    | 97              | 198          | 16,34,200    | 4,310.75       |
-| Chennai      | 89              | 176          | 14,56,800    | 4,780.90       |
+| City   | no_of_customers | no_of_orders | total_sales | avg_item_value |
+|--------|-----------------|--------------|-------------|----------------|
+| Mumbai | 19              | 64           | 6,23,023    | 4,829.64       |
+| Indore | 19              | 67           | 5,92,206    | 4,737.65       |
+| Jaipur | 20              | 62           | 5,60,937    | 4,487.50       |
+| Pune   | 19              | 54           | 4,87,681    | 4,474.14       |
+| Nagpur | 20              | 53           | 4,59,047    | 4,330.63       |
 
 ---
 
@@ -99,31 +105,17 @@ ecommerce-sql-analysis/
 
 **Objective:** Products with average selling price > ₹15,000.
 
-**Sample Result:**
-
-| ProductID | ProductName              | no_of_orders | sold_qty | avg_selling_price |
-|-----------|--------------------------|--------------|----------|-------------------|
-| P1045     | MacBook Pro 16"          | 48           | 52       | 1,89,990.00       |
-| P1092     | iPhone 15 Pro Max        | 67           | 89       | 1,49,900.00       |
-| P1078     | Samsung Galaxy S24 Ultra | 55           | 71       | 1,29,999.00       |
-| P1120     | Sony Bravia 65" OLED     | 31           | 34       | 1,79,990.00       |
-| P1056     | Dell XPS 15              | 42           | 48       | 1,65,000.00       |
+**Actual Result:**  
+**0 rows** — No product has average selling price > ₹15,000 (highest is ₹4,495).
 
 ---
 
 ### 5. Category MRP Analysis
 
-**Objective:** Categories where difference between Max and Min MRP > ₹10,000.
+**Objective:** Categories where (Max MRP − Min MRP) > ₹10,000.
 
-**Sample Result:**
-
-| CategoryName     | no_of_products | min_MRP   | max_MRP    | mrp_diff  |
-|------------------|----------------|-----------|------------|-----------|
-| Electronics      | 48             | 12,999    | 1,99,990   | 1,86,991  |
-| Laptops          | 22             | 45,990    | 2,49,990   | 2,04,000  |
-| Smartphones      | 35             | 14,999    | 1,59,900   | 1,44,901  |
-| Home Appliances  | 28             | 8,999     | 89,990     | 80,991    |
-| Cameras          | 15             | 24,990    | 1,45,000   | 1,20,010  |
+**Actual Result:**  
+**0 rows** — Maximum MRP difference in the data is ₹4,563 (Toys category).
 
 ---
 
@@ -131,15 +123,13 @@ ecommerce-sql-analysis/
 
 **Objective:** Payment methods with more than 10 successful transactions.
 
-**Sample Result:**
+**Actual Result:**
 
-| Method       | success_transactions | total_amount | avg_amount | max_amount |
-|--------------|----------------------|--------------|------------|------------|
-| UPI          | 312                  | 48,67,500    | 15,600.96  | 95,000     |
-| Credit Card  | 187                  | 42,35,800    | 22,651.34  | 1,25,000   |
-| Debit Card   | 156                  | 28,45,600    | 18,241.03  | 78,500     |
-| Net Banking  | 89                   | 19,67,200    | 22,103.37  | 1,10,000   |
-| Wallet       | 67                   | 9,84,300     | 14,691.04  | 45,000     |
+| Method | success_transactions | total_amount | avg_amount | max_amount |
+|--------|----------------------|--------------|------------|------------|
+| UPI    | 89                   | 8,28,955     | 9,314.10   | 27,440     |
+| Card   | 100                  | 8,97,778     | 8,977.78   | 33,795     |
+| COD    | 111                  | 9,96,161     | 8,974.42   | 22,792     |
 
 ---
 
@@ -147,23 +137,34 @@ ecommerce-sql-analysis/
 
 **Objective:** Top 15 products based on total quantity sold.
 
-**Sample Result (Top 5 shown):**
+**Actual Result:**
 
-| ProductID | ProductName           | CategoryName  | total_qty_sold | total_sales  |
-|-----------|-----------------------|---------------|----------------|--------------|
-| P1023     | Wireless Earbuds Pro  | Electronics   | 245            | 12,25,000    |
-| P1089     | Smart Watch Series 7  | Wearables     | 198            | 15,84,000    |
-| P1011     | Power Bank 20000mAh   | Accessories   | 176            | 5,28,000     |
-| P1067     | USB-C Fast Charger    | Accessories   | 165            | 2,47,500     |
-| P1045     | MacBook Pro 16"       | Laptops       | 52             | 98,79,480    |
+| ProductID | ProductName | CategoryName | total_qty_sold | total_sales |
+|-----------|-------------|--------------|----------------|-------------|
+| P028      | Product 28  | Furniture    | 43             | 1,37,299    |
+| P023      | Product 23  | Home         | 41             | 1,01,721    |
+| P025      | Product 25  | Beauty       | 34             | 15,470      |
+| P029      | Product 29  | Toys         | 33             | 1,25,202    |
+| P015      | Product 15  | Beauty       | 33             | 44,649      |
+| P005      | Product 5   | Beauty       | 33             | 1,16,688    |
+| P002      | Product 2   | Fashion      | 31             | 64,666      |
+| P049      | Product 49  | Toys         | 31             | 1,03,881    |
+| P043      | Product 43  | Home         | 30             | 1,25,070    |
+| P017      | Product 17  | Books        | 30             | 25,170      |
+| P046      | Product 46  | Sports       | 30             | 63,000      |
+| P044      | Product 44  | Kitchen      | 29             | 1,11,302    |
+| P013      | Product 13  | Home         | 29             | 40,223      |
+| P001      | Product 1   | Electronics  | 28             | 7,952       |
+| P039      | Product 39  | Toys         | 28             | 9,576       |
 
 ---
 
 ## 🛠 How to Run
 
-1. Connect to your database (BigQuery / MySQL / PostgreSQL etc.)
-2. Update table prefixes if required (`e1.` → your dataset/schema)
-3. Run queries one by one from the `queries/` folder
+1. Load the CSV files from the `data/` folder into your database
+2. Update table prefixes if required (`e1.` → your schema)
+3. Run queries from the `queries/` folder
+4. Compare your output with the files in `results/`
 
 ## 📈 Skills Demonstrated
 
